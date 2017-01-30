@@ -1,6 +1,0 @@
-D:\Projects\Tools\PackageFixer\PackageFixer\bin\Debug\PackageFixer.exe.config
-D:\Projects\Tools\PackageFixer\PackageFixer\bin\Debug\PackageFixer.exe
-D:\Projects\Tools\PackageFixer\PackageFixer\bin\Debug\PackageFixer.pdb
-D:\Projects\Tools\PackageFixer\PackageFixer\obj\Debug\PackageFixer.csprojResolveAssemblyReference.cache
-D:\Projects\Tools\PackageFixer\PackageFixer\obj\Debug\PackageFixer.exe
-D:\Projects\Tools\PackageFixer\PackageFixer\obj\Debug\PackageFixer.pdb

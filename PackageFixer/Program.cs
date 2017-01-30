@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PackageFixer.Analysis;
 
 namespace PackageFixer
 {
@@ -18,9 +19,11 @@ namespace PackageFixer
 
         public void Run()
         {
-            var solution = SolutionLoader.Load("d:\\Projects\\NControlLegacy\\nc\\Source\\NControl\\NControl.sln");
+            var solution = SolutionLoader.Load(@"D:\projects\Isatis\ncontrol\Source\NControl\NControl.sln");
 
-//            solution.AnalyzePackages("NeedsRemoval");
+//            new CheckPackageVersions().Check(solution);
+
+//            solution.AnalyzePackages("NControl.Bootstrap");
 
             solution.FindAssemblyRedirects();
 //            FindAnomalies(solution);

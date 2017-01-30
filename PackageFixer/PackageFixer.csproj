@@ -44,19 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalysePackages.cs" />
-    <Compile Include="AssemblyCache.cs" />
-    <Compile Include="AssemblyRedirectFinder.cs" />
-    <Compile Include="CsProjManager.cs" />
-    <Compile Include="Dir.cs" />
-    <Compile Include="NugetPackage.cs" />
-    <Compile Include="PackagesConfigReader.cs" />
+    <Compile Include="Analysis\AnalysePackages.cs" />
+    <Compile Include="Analysis\CheckPackagesInstalled.cs" />
+    <Compile Include="Analysis\CheckPackageVersions.cs" />
+    <Compile Include="Analysis\FindMissingReferences.cs" />
+    <Compile Include="Loader\AssemblyCache.cs" />
+    <Compile Include="Analysis\AssemblyRedirectFinder.cs" />
+    <Compile Include="Loader\CsProjManager.cs" />
+    <Compile Include="Loader\Dir.cs" />
+    <Compile Include="Loader\NugetPackage.cs" />
+    <Compile Include="Loader\PackagesConfigReader.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="Loader\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reference.cs" />
-    <Compile Include="Solution.cs" />
-    <Compile Include="SolutionLoader.cs" />
+    <Compile Include="Loader\Reference.cs" />
+    <Compile Include="Loader\Solution.cs" />
+    <Compile Include="Loader\SolutionLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
