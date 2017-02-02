@@ -22,16 +22,17 @@ namespace PackageFixer
 
                 var projectName = new DirectoryInfo(projectDir).Name;
 
-                var project = Dir.Glob($"{projectDir}\\*.csproj").Single();
+                var projectFile = Dir.Glob($"{projectDir}\\*.csproj").Single();
 
-                var dependencies = PackagesConfigReader.GetDependencies(file);
-                var references = CsProjManager.GetReferences(project);
-                projects.Add(new Project(project)
+                var project = new Project(projectFile)
                 {
-                    Name = projectName,
-                    Packages = dependencies.ToList(),
-                    References = references.ToList()
-                });
+                    Name = projectName
+                };
+
+                project.References = CsProjManager.GetReferences(project, projectFile).ToList();
+                project.Packages = PackagesConfigReader.GetDependencies(file).ToList();
+                
+                projects.Add(project);
             }
 
             var relevantProjects = projects.Where(n =>

@@ -44,5 +44,7 @@ namespace PackageFixer
                     p => Projects.Values.Where(proj => proj.Packages.Any(pack => pack.Id == p)));
             }
         }
+
+        public string Name { get; internal set; }
     }
 }

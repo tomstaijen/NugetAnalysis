@@ -1,9 +1,8 @@
 ﻿using System;
 using System.CodeDom;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using PackageFixer.Analysis;
 
 namespace PackageFixer
@@ -14,20 +13,64 @@ namespace PackageFixer
         static void Main(string[] args)
         {
             new Program().Run();
+//            PrintLibs();
             Console.ReadKey();
         }
 
         public void Run()
         {
-            var solution = SolutionLoader.Load(@"D:\projects\Isatis\ncontrol\Source\NControl\NControl.sln");
+            var solution = SolutionLoader.Load(@"D:\projects\NControlLegacy\nc\Source\NControl\NControl.sln");
 
-//            new CheckPackageVersions().Check(solution);
+            new CheckPackageVersions().Check(solution);
 
-//            solution.AnalyzePackages("NControl.Bootstrap");
+            solution.AnalyzePackages("NControl.Bootstrap");
+            solution.FindAssemblyRedirects("NControl.MijnNControl");
+        }
 
-            solution.FindAssemblyRedirects();
-//            FindAnomalies(solution);
+        public static void PrintLibs()
+        {
+            var result = new List<string>();
 
+            foreach (var s in Dir.Glob(@"D:\projects\NControlLegacy\nc\Source\NControl\*.sln"))
+            {
+                var sln = SolutionLoader.Load(s);
+
+                Console.WriteLine("Processing solution " + sln.Name);
+
+                result = result.Union(Libs(sln)).ToList();
+            }
+
+
+
+            result = result.Distinct().OrderBy(h => h).ToList();
+            var libs = result.Where(p => p.StartsWith(@"D:\Projects\NControlLegacy\nc\Source\NControl\Lib"));
+            foreach (var p in libs)
+            {
+                Console.WriteLine(p);
+            }
+
+            var dlls = Dir.Glob(@"D:\Projects\NControlLegacy\nc\Source\NControl\Lib\**\*.dll");
+            foreach (var dll in dlls)
+            {
+                if (!libs.Contains(dll))
+                {
+                    Console.WriteLine($"Remove: {dll}");
+                }
+            }
+        }
+
+        public static IEnumerable<string> Libs(Solution solution)
+        {
+            foreach (var p in solution.Projects)
+            {
+                foreach (var r in p.Value.References)
+                {
+                    if (!string.IsNullOrEmpty(r.HintPath))
+                    {
+                        yield return p.Value.AbsolutePath(r.HintPath);
+                    }
+                }
+            }
         }
 
         public void PrintAllPackages(Solution solution)

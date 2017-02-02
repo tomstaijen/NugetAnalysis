@@ -29,7 +29,7 @@ namespace PackageFixer
 
         }
 
-        public static IEnumerable<Reference> GetReferences(string csprojFile)
+        public static IEnumerable<Reference> GetReferences(Project container, string csprojFile)
         {
             var result = new List<Reference>();
 
@@ -53,7 +53,7 @@ namespace PackageFixer
                 {
                     hintPath = hintPathNode.Single().InnerText;
                 }
-                result.Add(new Reference(name, hintPath));
+                result.Add(new Reference(container, name, hintPath));
             }
 
             return result;
